@@ -1,0 +1,34 @@
+
+numbertosymbol <- function(x) {
+  #funktion um tetralzahl zu Nucleotid zu machen
+  key <- c("A","C","G","T")
+  #Schlüssel für tetralzahl zu Nucleotid
+  d <- as.integer(x+1)
+  #tetralzahl wird zu integer für key umgewandelt(da key mit stelle 1 anfängt aber tetralzahl 0-3 ist, +1)
+  return(key[d])
+  #über integer d wird der entsprechende Nucleotidbuchstabe angesteuert
+}
+numbertopattern <-function(number,laenge) {
+  #definition der Funktion: number ist die dezimalzahl, laenge ist die Länge als numeric
+  pattern <- {}
+  #vektor, der mit den symbolen des patterns gefüllt wird
+  a <- number
+  #für den ersten Schritt der forschleife, wird a als number definiert
+  for(i in 1:laenge) {
+    #forschleife für jede stelle des patterns
+    b <- numbertosymbol(a%%4)
+    #b ist als character das dem rest a entsprechendes Nucleotid
+    a <- a%/%4
+    #für den nächsten Schritt wird der Dividend ermittelt
+    pattern[i] <- b
+    #pattern wird für jedes b um ein nucleotid erweitert
+  }
+  return(rev(pattern))
+  #ausgabe des patterns, was mit revert umgedreht wurde - https://www.rdocumentation.org/packages/base/versions/3.6.0/topics/rev
+}
+
+sample <- c(45)
+laenge <- 4
+extra <- c(5353)
+laenge <- 7
+numbertopattern(extra)

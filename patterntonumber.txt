@@ -1,0 +1,39 @@
+symboltonumber <- function(a) {
+  #Funktion jedem Buchstabencode eine Zahl zuzuweisen
+  ke <- c(0,1,2,3)
+  #Zeilen für eine Matrix, jede Zahl entspricht einem Buchstaben
+  names <- c("A","C","G","T")
+  #Spaltennamen für eine Schlüsselmatrix
+  key <- matrix(data=ke, nrow=2, ncol=4, byrow=TRUE,dimnames=list(c(1,2),names))
+  #eine Matrix mit so vielen Spalten wie Buchstaben wird gebildet
+  return(key[1,a])
+  #die einem Buchstaben entsprechende Zahl wird ausgegeben
+}
+
+quadtodec <- function(b) {
+  #Funktion zur Umwandlung eines Tetralzahlvektors in eine Dezimalzahl
+  dec <-{}
+  #zuerst Vektor für einzelne Dezimalzahlen für jede Stellt
+  for (i in 1:length(b)) {
+    #Schleife, die jede Stelle 1er, 4er,16er in Dezimalzahlen umwandelt
+    dec[i] <- b[i]*(4^(length(b)-i))
+    #allgemeine Formel zur Berechnung der Dezimalzahlen. die Potenz ist hierbei die Länge des Vektors (bspw. 3 Stellen lang, erste bzw. höchste Ziffer wird über 4^2 berechnet) minus i
+  }
+  return(sum(dec))
+  #Ausgabe der Dezimalzahl aus den Dezimalzahlen für jede Ziffer
+}
+
+patterntonumber <- function(text) {
+  #Funktion, die einen Vektor voller Nucleotidcodes in eine Dezimalzahl umwandelt
+  quad <- {}
+  #leerer Vektor, der mit tetralzahlen gefüllt wird; eine für jeden Buchstaben
+  for (i in 1:length(text)) {
+    #Schleife, die jeden Nucleotidcode einzeln umwandelt
+    quad[i] <- symboltonumber(text[i])
+    #ein vektor mit tetralzahl für jeden Nucleotidcodebuchstaben 
+  }
+  number <- quadtodec(quad)
+  #Dezimalzahlen aus den Tetralzahlen der Codes
+  sum(number)
+  #zahlenvektor zu numeric 
+}
